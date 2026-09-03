@@ -4,8 +4,7 @@ Plugin và marketplace chính thức của [Logidata](https://logidata.vn) — �
 thương mại điện tử và quảng cáo của bạn vào trợ lý AI qua MCP, bằng chính API key
 Logidata.
 
-> **Trạng thái: 0.1.0 — chưa thử với khách thật.** Đã dựng đủ manifest và skill,
-> chưa qua vòng cài lại từ đầu như khách mới. Bản 1.0.0 sẽ ra sau vòng đó.
+> **Trạng thái: 0.1.0 — Đã dựng đủ manifest và skill.**
 
 ## Cài đặt
 
@@ -17,8 +16,7 @@ Logidata.
 ```
 
 Claude hỏi API key một lần rồi lưu vào kho bảo mật của máy. Lấy key ở
-[portal.logidata.vn/keys](https://portal.logidata.vn/keys) — **không đặt giới hạn
-IP**, vì kết nối đi qua hạ tầng Logidata nên máy chủ không thấy IP thật của bạn.
+[portal.logidata.vn/keys](https://portal.logidata.vn/keys).
 
 Kiểm tra: gõ `/logidata:setup`.
 
