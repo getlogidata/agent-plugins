@@ -1,0 +1,80 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  claude-plugin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Cài Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      # Pipeline review của marketplace cộng đồng chạy đúng lệnh này.
+      - name: claude plugin validate --strict
+        run: claude plugin validate ./plugins/logidata --strict
+
+      - name: claude plugin validate marketplace --strict
+        run: claude plugin validate . --strict
+
+  guards:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: JSON hợp lệ
+        run: |
+          for f in .claude-plugin/marketplace.json \
+                   plugins/logidata/.claude-plugin/plugin.json \
+                   plugins/logidata/.mcp.json; do
+            python3 -c "import json,sys; json.load(open(sys.argv[1]))" "$f"
+            echo "ok  $f"
+          done
+
+      - name: Mọi skill có SKILL.md với name + description
+        run: |
+          fail=0
+          for d in plugins/logidata/skills/*/; do
+            f="$d/SKILL.md"
+            if [ ! -f "$f" ]; then echo "THIEU $f"; fail=1; continue; fi
+            grep -q '^name:'        "$f" || { echo "THIEU name: $f";        fail=1; }
+            grep -q '^description:' "$f" || { echo "THIEU description: $f"; fail=1; }
+          done
+          exit $fail
+
+      # Manifest Codex KHÔNG được khai `mcpServers`: `.mcp.json` dùng chung với
+      # Claude và chứa ${user_config.api_key}, thứ chỉ Claude Code thay thế.
+      # Khai ở Codex là gửi nguyên văn chuỗi đó làm header Authorization.
+      - name: Codex không khai mcpServers
+        run: |
+          f=plugins/logidata/.codex-plugin/plugin.json
+          if [ -f "$f" ] && grep -q 'mcpServers' "$f"; then
+            echo "LOI: $f khai mcpServers — xem plan muc 3.8.1 diem 1"
+            exit 1
+          fi
+          echo "ok"
+
+      # Skill nhóm A phải chặn model tự gọi trên CẢ HAI nền tảng. Claude đọc
+      # frontmatter; Codex chỉ đọc skills/<ten>/agents/openai.yaml.
+      - name: Skill nhóm A chặn model tự gọi
+        run: |
+          fail=0
+          for s in setup quota doctor; do
+            f="plugins/logidata/skills/$s/SKILL.md"
+            grep -q 'disable-model-invocation: true' "$f" \
+              || { echo "THIEU disable-model-invocation: $f"; fail=1; }
+            y="plugins/logidata/skills/$s/agents/openai.yaml"
+            if [ -f plugins/logidata/.codex-plugin/plugin.json ]; then
+              grep -q 'allow_implicit_invocation: false' "$y" 2>/dev/null \
+                || { echo "THIEU $y (can cho Codex)"; fail=1; }
+            fi
+          done
+          exit $fail

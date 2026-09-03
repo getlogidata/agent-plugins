@@ -1,0 +1,40 @@
+{
+  "name": "logidata",
+  "displayName": "Logidata API",
+  "version": "0.1.0",
+  "description": "Kéo và phân tích dữ liệu TikTok Ads, TikTok Shop, Shopee, Google Ads, YouTube, Search Console, Google Sheets bằng API key Logidata. Trợ lý tự chọn endpoint, tự dựng tham số, trả dữ liệu thật.",
+  "author": {
+    "name": "Logidata",
+    "url": "https://logidata.vn"
+  },
+  "homepage": "https://docs.logidata.vn/mcp",
+  "repository": "https://github.com/getlogidata/agent-plugins",
+  "license": "MIT",
+  "keywords": [
+    "tiktok-ads",
+    "tiktok-shop",
+    "shopee",
+    "google-ads",
+    "youtube",
+    "search-console",
+    "ecommerce",
+    "vietnam",
+    "analytics",
+    "mcp"
+  ],
+  "userConfig": {
+    "api_key": {
+      "type": "string",
+      "title": "API key Logidata",
+      "description": "Lấy tại https://portal.logidata.vn/keys — dạng ld_live_… Key có GIỚI HẠN IP sẽ không dùng được qua MCP: kết nối đi qua hạ tầng Logidata nên máy chủ không thấy IP thật của bạn. Dùng key không đặt giới hạn IP.",
+      "required": true,
+      "sensitive": true
+    },
+    "mcp_url": {
+      "type": "string",
+      "title": "Địa chỉ MCP",
+      "description": "Chỉ đổi khi Logidata hướng dẫn (ví dụ môi trường thử nghiệm).",
+      "default": "https://mcp.logidata.vn/mcp"
+    }
+  }
+}
