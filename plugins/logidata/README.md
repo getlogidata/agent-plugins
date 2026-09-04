@@ -3,12 +3,21 @@
 Hỏi dữ liệu nền tảng bằng tiếng Việt. Trợ lý tự chọn endpoint, tự dựng tham số,
 trả dữ liệu thật của bạn.
 
+Cần **hai mảnh**: trình kết nối (lo dữ liệu) + plugin này (lo kỹ năng).
+
 ## Cài trong 3 bước
 
-**1. Lấy API key** ở [portal.logidata.vn/keys](https://portal.logidata.vn/keys).
+**1. Kết nối Logidata trên [claude.ai](https://claude.ai)** → Cài đặt → Trình kết
+nối → Thêm trình kết nối tuỳ chỉnh:
 
-> Key **không đặt giới hạn IP**. Kết nối MCP đi qua hạ tầng Logidata nên máy chủ
-> không thấy IP thật của bạn — key có giới hạn IP luôn bị từ chối.
+| Ô | Điền |
+|---|---|
+| Địa chỉ máy chủ MCP | `https://mcp.logidata.vn/mcp` |
+| Client ID *(mục nâng cao)* | `claude-ai` |
+| Client Secret | để trống |
+
+Đăng nhập Logidata → Đồng ý. Claude Code trên máy tự thừa hưởng — không phải dán
+key vào đâu. *(Cần gói Claude Pro/Max/Team/Enterprise.)*
 
 **2. Cài plugin:**
 
@@ -17,10 +26,12 @@ trả dữ liệu thật của bạn.
 /plugin install logidata@logidata
 ```
 
-Claude hỏi API key **một lần** và lưu vào kho bảo mật của máy (Keychain trên
-macOS). Key không nằm trong file cấu hình nào, không vào git.
-
 **3. Kiểm tra:** gõ `/logidata:setup`. Thấy đúng gói và tên kết nối của mình là xong.
+
+> Không dùng tài khoản claude.ai? Cắm bằng API key: `claude mcp add logidata
+> --transport http https://mcp.logidata.vn/mcp --header "Authorization: Bearer
+> ld_live_..."`. Dùng key **không đặt giới hạn IP** — kết nối đi qua hạ tầng
+> Logidata nên máy chủ không thấy IP thật của bạn.
 
 ## Nền tảng hỗ trợ
 
