@@ -216,3 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# App ChatGPT dev-mode la account-level, khong dung chung duoc.
+# Giu ban test cuc bo ngoai git — xem plan plugin-claude-chatgpt.md muc 2.4.
+plugins/*/.app.json

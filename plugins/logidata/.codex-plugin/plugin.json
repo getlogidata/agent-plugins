@@ -1,0 +1,39 @@
+{
+  "name": "logidata",
+  "version": "0.1.0",
+  "description": "Kéo và phân tích dữ liệu TikTok Ads, TikTok Shop, Shopee, Google Ads, YouTube, Search Console, Google Sheets qua Logidata. Trợ lý tự chọn endpoint, tự dựng tham số, trả dữ liệu thật.",
+  "author": {
+    "name": "Logidata",
+    "email": "hi@logidata.vn",
+    "url": "https://logidata.vn"
+  },
+  "homepage": "https://docs.logidata.vn/mcp",
+  "repository": "https://github.com/getlogidata/agent-plugins",
+  "license": "MIT",
+  "keywords": [
+    "tiktok-ads",
+    "tiktok-shop",
+    "shopee",
+    "google-ads",
+    "youtube",
+    "search-console",
+    "ecommerce",
+    "vietnam",
+    "analytics",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Logidata",
+    "shortDescription": "Dữ liệu quảng cáo và thương mại điện tử của bạn, hỏi bằng tiếng Việt.",
+    "longDescription": "Logidata gom dữ liệu TikTok Ads, TikTok Shop, Shopee, Google Ads, YouTube, Search Console và Google Sheets về một cổng duy nhất. Plugin này dạy trợ lý cách hỏi đúng endpoint, dựng đúng tham số, tránh các bẫy đã biết của từng nền tảng (múi giờ, unix giây, phân trang cursor, quota theo unit) và đọc kết quả cho đúng. Cần một kết nối Logidata MCP đã thêm sẵn trong ChatGPT.",
+    "developerName": "Logidata",
+    "category": "Productivity",
+    "capabilities": [
+      "Read"
+    ],
+    "websiteURL": "https://logidata.vn/",
+    "privacyPolicyURL": "https://logidata.vn/privacy",
+    "termsOfServiceURL": "https://logidata.vn/terms"
+  }
+}

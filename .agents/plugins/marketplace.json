@@ -1,0 +1,20 @@
+{
+  "name": "logidata",
+  "interface": {
+    "displayName": "Logidata"
+  },
+  "plugins": [
+    {
+      "name": "logidata",
+      "source": {
+        "source": "local",
+        "path": "./plugins/logidata"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

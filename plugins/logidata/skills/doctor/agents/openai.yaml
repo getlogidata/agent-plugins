@@ -1,0 +1,4 @@
+# Codex không đọc `disable-model-invocation` trong frontmatter SKILL.md của Claude.
+# Thiếu file này thì mặc định là true — model tự gọi `doctor` giữa một cuộc phân tích.
+policy:
+  allow_implicit_invocation: false

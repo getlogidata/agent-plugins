@@ -33,7 +33,9 @@ jobs:
       - name: JSON hợp lệ
         run: |
           for f in .claude-plugin/marketplace.json \
+                   .agents/plugins/marketplace.json \
                    plugins/logidata/.claude-plugin/plugin.json \
+                   plugins/logidata/.codex-plugin/plugin.json \
                    plugins/logidata/.mcp.json; do
             python3 -c "import json,sys; json.load(open(sys.argv[1]))" "$f"
             echo "ok  $f"
@@ -57,7 +59,19 @@ jobs:
         run: |
           f=plugins/logidata/.codex-plugin/plugin.json
           if [ -f "$f" ] && grep -q 'mcpServers' "$f"; then
-            echo "LOI: $f khai mcpServers — xem plan muc 3.8.1 diem 1"
+            echo "LOI: $f khai mcpServers — xem plan plugin-claude-chatgpt.md muc 2.4"
+            exit 1
+          fi
+          echo "ok"
+
+      # App ChatGPT tạo trong Chế độ nhà phát triển là ACCOUNT-LEVEL: nó chỉ hiện
+      # với tài khoản đã tạo ra nó. Commit `.app.json` nghĩa là mọi khách cài xong
+      # đều trỏ vào một app không thuộc về họ. Khách tự thêm connector theo
+      # docs.logidata.vn/mcp; plugin public chỉ ship `skills/`.
+      - name: Không commit .app.json
+        run: |
+          if [ -e plugins/logidata/.app.json ]; then
+            echo "LOI: .app.json bi commit — xem plan plugin-claude-chatgpt.md muc 2.4"
             exit 1
           fi
           echo "ok"
