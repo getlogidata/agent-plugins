@@ -45,15 +45,20 @@ Trình bày: một bảng theo kênh, cột *chi tiêu*, *doanh thu*, *tiền th
 *ROAS (theo doanh thu)*, *ROAS (theo tiền thực nhận)*. Hai cột ROAS khác nhau là
 thông tin có giá trị — đừng chỉ đưa một cột rồi để người dùng tự đoán là cột nào.
 
-## YouTube không thuộc bảng này
+## YouTube không thuộc bảng ROAS này
 
-Kênh YouTube là đầu phễu, **không có chi phí trực tiếp** trong dữ liệu này. Đừng
+Kênh YouTube là đầu phễu, **không có chi phí quảng cáo** trong dữ liệu này. Đừng
 nhét watch time hay subscriber vào cùng bảng với ROAS như thể cùng đơn vị. Nếu
 người dùng muốn nhìn cả kênh: để YouTube ở một bảng riêng bên dưới, và nói rõ nó
 không tham gia phép tính ROAS.
 
-Quảng cáo YouTube trả tiền thì thuộc Google Ads — nó vào bảng chính, không phải
-bảng YouTube.
+**Doanh thu kênh YouTube** (`estimatedRevenue`… qua `analyze-youtube`, cần kênh đã
+bật kiếm tiền) là một khoản **thu nhập** thật, không phải chi phí. Nó có thể vào
+bảng lãi/lỗ tổng của người dùng, nhưng để ở **bảng YouTube riêng** — nó không phải
+doanh thu bán hàng và không đi vào mẫu số ROAS. Ghi rõ nguồn.
+
+Quảng cáo YouTube trả tiền (tiền người dùng bỏ ra chạy ads) thì thuộc Google Ads —
+nó vào bảng chính, không phải bảng YouTube. Đừng lẫn với doanh thu kênh ở trên.
 
 ## Khi thiếu nguồn
 

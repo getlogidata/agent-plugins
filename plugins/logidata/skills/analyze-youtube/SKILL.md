@@ -1,6 +1,6 @@
 ---
 name: analyze-youtube
-description: Phân tích kênh và video YouTube qua Logidata — lượt xem, watch time, subscriber, nguồn traffic, từ khoá người xem dùng để tìm ra kênh, hiệu suất từng video, bình luận. Dùng cho kênh của chính người dùng (đã kết nối) hoặc kênh công khai của người khác. KHÔNG dùng cho quảng cáo YouTube trả tiền (đó là analyze-ads / Google Ads), KHÔNG dùng cho volume tìm kiếm Google (đó là analyze-search).
+description: Phân tích kênh và video YouTube qua Logidata — lượt xem, watch time, subscriber, nguồn traffic, từ khoá người xem dùng để tìm ra kênh, hiệu suất từng video, bình luận, và doanh thu / thu nhập kênh (kênh đã bật kiếm tiền). Dùng cho kênh của chính người dùng (đã kết nối) hoặc kênh công khai của người khác. KHÔNG dùng cho chi phí quảng cáo YouTube trả tiền — tiền người dùng bỏ ra chạy ads là analyze-ads / Google Ads, khác với doanh thu kênh kiếm được. KHÔNG dùng cho volume tìm kiếm Google (đó là analyze-search).
 ---
 
 # Phân tích YouTube
@@ -19,15 +19,22 @@ Hỏi một câu rẻ hơn dò mười lần.
 Thái Bình Dương** — không phải nửa đêm giờ Việt Nam. 429 của YouTube **khác** với
 hết hạn mức tháng của người dùng; đừng khuyên họ đi mua thêm hạn mức.
 
-**Tiền không nằm ở đây.** Mọi thứ liên quan chi phí quảng cáo thuộc Google Ads.
-Cùng kiểu bẫy với TikTok Ads (số tiền chỉ có ở `report/integrated`).
+**Hai loại "tiền" — đừng lẫn.**
+
+- **Doanh thu / thu nhập kênh** (kênh kiếm được bao nhiêu): CÓ ở đây — provider
+  `youtube-analytics`, endpoint `/reports`, bộ chỉ số
+  `estimatedRevenue,estimatedAdRevenue,grossRevenue,cpm,playbackBasedCpm`. Cần
+  kênh đã bật kiếm tiền (YouTube Partner Program) — xem cảnh báo ở cuối file.
+- **Chi phí quảng cáo** (người dùng bỏ ra bao nhiêu để chạy ads): KHÔNG ở đây —
+  thuộc Google Ads (cùng kiểu bẫy với TikTok Ads, số tiền chỉ có ở
+  `report/integrated`).
 
 ## Ba chế độ — phân loại câu hỏi TRƯỚC khi gọi
 
 | Câu hỏi thuộc loại | provider | Ví dụ |
 |---|---|---|
 | Kênh của người dùng — **có gì** | `youtube` | video nào, playlist nào, bình luận gì, thống kê công khai |
-| Kênh của người dùng — **bao nhiêu / tại sao** | `youtube-analytics` | watch time, subscriber tăng/giảm, từ khoá, nguồn traffic |
+| Kênh của người dùng — **bao nhiêu / tại sao** | `youtube-analytics` | watch time, subscriber tăng/giảm, từ khoá, nguồn traffic, **doanh thu / RPM / CPM** |
 | Kênh **người khác** | `youtube-public` | thống kê công khai của đối thủ, video đang lên |
 
 Chọn sai chế độ là nguyên nhân phổ biến nhất của "endpoint không trả số tôi cần".
@@ -63,10 +70,10 @@ Nó trả về `channel_id`, thống kê nền, và quan trọng nhất:
 **4. Bình luận:** `/commentThreads` với `video_id` — **chỉ khi người dùng hỏi thẳng
 về bình luận.** Xem cảnh báo ở cuối file.
 
-## Bốn bộ metrics/dimensions đã kiểm — dùng nguyên, đừng bịa
+## Năm bộ metrics/dimensions đã kiểm — dùng nguyên, đừng bịa
 
 `metrics` và `dimensions` của YouTube Analytics không phải tổ hợp tự do: sai một
-cặp là 400, và 400 vẫn tính 1 request. Bốn bộ dưới đây là bộ Logidata đã kiểm:
+cặp là 400, và 400 vẫn tính 1 request. Năm bộ dưới đây là bộ Logidata đã kiểm:
 
 | Người dùng hỏi | `metrics` | `dimensions` |
 |---|---|---|
@@ -74,9 +81,24 @@ cặp là 400, và 400 vẫn tính 1 request. Bốn bộ dưới đây là bộ 
 | **"người ta tìm gì để ra video của tôi"** | `views` | `insightSearchTerms` |
 | "người xem đến từ đâu" | `views,estimatedMinutesWatched` | `insightTrafficSourceType` |
 | "video nào kéo nhiều nhất" | `views,likes,comments` | `video` |
+| **"kênh tôi kiếm được bao nhiêu tiền"** | `estimatedRevenue,estimatedAdRevenue,grossRevenue,cpm,playbackBasedCpm` | `day` |
 
 Cần tổ hợp khác? Tra **tài liệu YouTube Analytics API** trước, đừng thử-sai.
-`describe_endpoint` (miễn phí) cho biết endpoint nhận tham số gì.
+`describe_endpoint` (miễn phí) cho biết endpoint nhận tham số gì — nó cũng liệt
+kê các `presets`, gồm bộ "revenue".
+
+## Doanh thu — hai chỗ dễ hiểu nhầm kết quả
+
+**Kết quả doanh thu rỗng ≠ lỗi.** Bộ chỉ số doanh thu chỉ có số với kênh **đã bật
+kiếm tiền** (YouTube Partner Program). Kênh chưa vào YPP: gọi trả HTTP 200 nhưng
+danh sách `rows` rỗng — đó là trạng thái bình thường. Nói thẳng với người dùng
+"kênh chưa bật kiếm tiền nên YouTube không trả số doanh thu", **đừng** khuyên họ
+kiểm tra API key hay đi mua thêm hạn mức.
+
+**403 ở truy vấn doanh thu (mà truy vấn Analytics khác chạy được)** = kết nối kênh
+này cấp quyền **trước 2026-09-04**, grant đó chưa có quyền đọc doanh thu. Người
+dùng cần vào portal **cấp quyền lại kênh YouTube**. Đây **không phải**
+`token_revoked` — đừng bảo họ kênh đã bị thu hồi quyền.
 
 ## `insightSearchTerms` — chỗ dễ nói sai sự thật nhất
 
