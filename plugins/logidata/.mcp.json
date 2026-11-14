@@ -2,7 +2,7 @@
   "mcpServers": {
     "logidata": {
       "url": "${user_config.mcp_url}",
-      "transport": "http",
+      "type": "http",
       "headers": {
         "Authorization": "Bearer ${user_config.api_key}"
       }
