@@ -36,7 +36,7 @@ key vào đâu. *(Cần gói Claude Pro/Max/Team/Enterprise.)*
 ## Nền tảng hỗ trợ
 
 TikTok Ads · TikTok Shop · Shopee (kèm Shopee Ads, Shopee Affiliate) · Google Ads ·
-YouTube · Google Search Console · Google Sheets
+YouTube · Google Search Console · Google Sheets · Facebook Ads
 
 Mỗi API key chỉ thấy phần nền tảng bạn đã cấp quyền ở
 [portal.logidata.vn/connections](https://portal.logidata.vn/connections).
@@ -63,7 +63,7 @@ Không cần gọi lệnh. Hỏi bình thường, trợ lý tự chọn skill:
 
 - Mỗi lượt **lấy dữ liệu** tính 1 request vào hạn mức tháng, kể cả khi nền tảng
   trả lỗi. Các lượt tra danh mục thì miễn phí.
-- Tất cả **chỉ đọc** — không có đường nào sửa hay xoá chiến dịch, đơn hàng.
+- Mặc định **chỉ đọc** — không có đường nào sửa hay xoá đơn hàng hay chiến dịch. Ngoại lệ duy nhất: Facebook Ads cho bật/tắt và đổi ngân sách khi key nấc Đầy đủ đã bật quyền ghi, và trợ lý luôn hỏi bạn xác nhận trước.
 - Phản hồi quá lớn bị cắt và đánh dấu `truncated`. Thu hẹp khoảng ngày rồi hỏi lại.
 
 Hướng dẫn đầy đủ, gồm cả ChatGPT / claude.ai / Codex:

@@ -10,7 +10,7 @@
     {
       "name": "logidata",
       "source": "./plugins/logidata",
-      "description": "Kéo và phân tích dữ liệu TikTok Ads, TikTok Shop, Shopee, Google Ads, YouTube, Search Console và Google Sheets bằng API key Logidata.",
+      "description": "Kéo và phân tích dữ liệu TikTok Ads, TikTok Shop, Shopee, Google Ads, YouTube, Search Console, Google Sheets và Facebook Ads bằng API key Logidata.",
       "version": "0.1.0"
     }
   ]

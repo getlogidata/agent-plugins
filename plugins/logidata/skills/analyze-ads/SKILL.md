@@ -1,6 +1,6 @@
 ---
 name: analyze-ads
-description: Phân tích quảng cáo qua Logidata — chi tiêu, hiển thị, nhấp, CPC, CPM, CTR, ROAS, hiệu suất chiến dịch trên TikTok Ads, Google Ads và Shopee Ads. Dùng khi người dùng hỏi về tiền quảng cáo, hiệu suất campaign hoặc so sánh kênh quảng cáo.
+description: Phân tích quảng cáo qua Logidata — chi tiêu, hiển thị, nhấp, CPC, CPM, CTR, ROAS, hiệu suất chiến dịch trên TikTok Ads, Google Ads và Shopee Ads (Facebook Ads chi tiết xem analyze-facebook-ads). Dùng khi người dùng hỏi về tiền quảng cáo, hiệu suất campaign hoặc so sánh kênh quảng cáo.
 ---
 
 # Phân tích quảng cáo
@@ -67,6 +67,12 @@ WHERE segments.date DURING LAST_7_DAYS
 
 `GET /api/v2/ads/get_all_cpc_ads_daily_performance` với `start_date`, `end_date`,
 và `campaign_id_list` (tuỳ chọn). Chỉ có quảng cáo CPC, theo ngày.
+
+## Facebook Ads
+
+Dùng skill `analyze-facebook-ads` — nó có đủ bẫy riêng của Facebook
+(`act_...`, `inline_link_clicks`, `reach` không cộng được, breakdown giờ ≤ 7 ngày,
+mảng `actions`). Khi so với các nền tảng khác, cũng lấy số từ đó.
 
 ## So sánh nhiều nền tảng thì nói giới hạn trước
 
