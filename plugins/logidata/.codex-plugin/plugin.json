@@ -1,6 +1,6 @@
 {
   "name": "logidata",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Kéo và phân tích dữ liệu TikTok Ads, TikTok Shop, Shopee, Google Ads, YouTube, Search Console, Google Sheets, Facebook Ads qua Logidata. Trợ lý tự chọn endpoint, tự dựng tham số, trả dữ liệu thật.",
   "author": {
     "name": "Logidata",

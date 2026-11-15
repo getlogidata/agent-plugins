@@ -1,7 +1,7 @@
 {
   "name": "logidata",
   "displayName": "Logidata API",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Kéo và phân tích dữ liệu TikTok Ads, TikTok Shop, Shopee, Google Ads, YouTube, Search Console, Google Sheets, Facebook Ads bằng API key Logidata. Trợ lý tự chọn endpoint, tự dựng tham số, trả dữ liệu thật.",
   "author": {
     "name": "Logidata",
